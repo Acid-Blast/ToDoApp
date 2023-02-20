@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/Sign-check-icon.png/600px-Sign-check-icon.png?20200929115132">
+
+
+    <link rel="stylesheet" href="../css/style.css">
+
+    <script src="../js/User.js" defer></script>
+    <script src="../js/theme.js" defer></script>
+    <script src="../js/app.js" defer></script>
+
+    <title>ToDo App</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <div>
+                <a href="index.html"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/Sign-check-icon.png/600px-Sign-check-icon.png?20200929115132" alt="logo"></a>
+                <h1>ToDo App</h1>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="main-container">
+            <div class="card" id="card-hoy">
+                <h2>Para hoy</h2>
+                <div class="card-header">
+                    <input type="text" id="tarea-hoy" placeholder="Agregar tarea...">
+                    <span class="addBtn">Agregar</span>
+                </div>
+                <ul id="ul-hoy">
+                    <li>tarea de ejemplo</li>
+                    <li>tarea de ejemplo</li>
+                    <li>tarea de ejemplo</li>
+                </ul>
+            </div>
+            <div class="card" id="card-mañana">
+                <h2>Para mañana</h2>
+                <div class="card-header">
+                    <input type="text" id="tarea-mañana" placeholder="Agregar tarea...">
+                    <span class="addBtn" >Agregar</span>
+                </div>
+                <ul id="ul-mañana">
+                    <li>tarea de ejemplo</li>
+                    <li>tarea de ejemplo</li>
+                    <li>tarea de ejemplo</li>
+                </ul>
+            </div>
+            <div class="card" id="card-compras">
+                <h2>Lista de compras</h2>
+                <div class="card-header">
+                    <input type="text" id="tarea-compras" placeholder="Agregar tarea...">
+                    <span class="addBtn" >Agregar</span>
+                </div>
+                <ul id="ul-compras">
+                    <li>tarea de ejemplo</li>
+                    <li>tarea de ejemplo</li>
+                    <li>tarea de ejemplo</li>
+                </ul>
+            </div>
+            
+        </div>
+
+
+        <aside>
+            <button darkMode=true class="dark-mode" id="btn-theme"><img id="dark-mode-img" src="https://cdn-icons-png.flaticon.com/512/5262/5262027.png" alt=""></button>
+        </aside>
+    </main>
+
+    <footer>
+        <h4>Marcelo Falasca | Coderhouse Javascript | </h4>
+    </footer>
+
+</body>
+</html>
