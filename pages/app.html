@@ -9,7 +9,7 @@
 
     <link rel="stylesheet" href="../css/style.css">
 
-    <script src="../js/User.js" defer></script>
+    <script src="../js/Obj.js" defer></script>
     <script src="../js/theme.js" defer></script>
     <script src="../js/app.js" defer></script>
 
@@ -19,7 +19,7 @@
     <header>
         <nav>
             <div>
-                <a href="index.html"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/Sign-check-icon.png/600px-Sign-check-icon.png?20200929115132" alt="logo"></a>
+                <a href="app.html"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/Sign-check-icon.png/600px-Sign-check-icon.png?20200929115132" alt="logo"></a>
                 <h1>ToDo App</h1>
             </div>
         </nav>
@@ -31,37 +31,25 @@
                 <h2>Para hoy</h2>
                 <div class="card-header">
                     <input type="text" id="tarea-hoy" placeholder="Agregar tarea...">
-                    <span class="addBtn">Agregar</span>
+                    <span class="addBtn" id="addHoy">Agregar</span>
                 </div>
-                <ul id="ul-hoy">
-                    <li>tarea de ejemplo</li>
-                    <li>tarea de ejemplo</li>
-                    <li>tarea de ejemplo</li>
-                </ul>
+                <ul id="ul-hoy"></ul>
             </div>
             <div class="card" id="card-mañana">
                 <h2>Para mañana</h2>
                 <div class="card-header">
                     <input type="text" id="tarea-mañana" placeholder="Agregar tarea...">
-                    <span class="addBtn" >Agregar</span>
+                    <span class="addBtn" id="addMañana" >Agregar</span>
                 </div>
-                <ul id="ul-mañana">
-                    <li>tarea de ejemplo</li>
-                    <li>tarea de ejemplo</li>
-                    <li>tarea de ejemplo</li>
-                </ul>
+                <ul id="ul-mañana"></ul>
             </div>
             <div class="card" id="card-compras">
                 <h2>Lista de compras</h2>
                 <div class="card-header">
                     <input type="text" id="tarea-compras" placeholder="Agregar tarea...">
-                    <span class="addBtn" >Agregar</span>
+                    <span class="addBtn" id="addCompras" >Agregar</span>
                 </div>
-                <ul id="ul-compras">
-                    <li>tarea de ejemplo</li>
-                    <li>tarea de ejemplo</li>
-                    <li>tarea de ejemplo</li>
-                </ul>
+                <ul id="ul-compras"></ul>
             </div>
             
         </div>
