@@ -6,20 +6,77 @@
  * ...
  */
 
-// const guardarSesion = (userData) => {
-//     //guarda las tareas en el array
-//     const tareas = document.getElementsByTagName("LI");
-//     for ( let i = 0; i < tareas.length; i++){
-//         userData.push(tareas[i].innerText.slice(0, tareas[i].innerText.length-2))
-//     }
-
-// }
-// let userDataHoy = [];
-// guardarSesion(userDataHoy);
 
 let loggedUser = JSON.parse(localStorage.getItem("loggedUser")) || [];
 let user = new User(loggedUser);
-console.log(user)
+
+let BBDD = JSON.parse(localStorage.getItem("users")) || [];
+
+
+//actualiza el array BBDD y lo sube al localStorage
+const guardarSesion = () => {
+    for (usuario of BBDD){
+        if (usuario._user === user._user){
+            usuario._tasks = user._tasks;
+        }
+    }
+
+    localStorage.setItem("users", JSON.stringify(BBDD));       
+
+    console.log(BBDD);
+}
+
+//carga sesion de usuario
+const cargarSesion = () => {
+    if(user._tasks !== undefined){
+
+        const span = document.getElementById("perfil-usuario");
+        span.innerHTML = `
+            <a id="btn-user">${user._user}</a>
+        `;
+
+        for (usuario of BBDD){
+            if ( usuario._user === user._user && usuario._tasks !== undefined ){
+                const tareaHoy = document.getElementById("ul-hoy");
+                const tareaMañana = document.getElementById("ul-mañana");
+                const tareaCompras = document.getElementById("ul-compras");
+    
+                usuario._tasks.forEach(e => {
+                    const li = document.createElement("LI");
+    
+                    if(e._type === "tarea-hoy"){
+                        let content = document.createTextNode(e._content);
+                        li.appendChild(content);
+    
+                        tareaHoy.appendChild(li);
+                    }
+                    if(e._type === "tarea-mañana"){
+                        let content = document.createTextNode(e._content);
+                        li.appendChild(content);
+    
+                        tareaMañana.appendChild(li);
+                    }
+                    if(e._type === "tarea-compras"){
+                        let content = document.createTextNode(e._content);
+                        li.appendChild(content);
+    
+                        tareaCompras.appendChild(li);
+                    }
+                });
+                user._tasks = usuario._tasks;
+            }
+        }
+    }
+}
+cargarSesion()
+
+//cerrar sesion -> vuelve al login
+const btn = document.getElementById("btn-cerrarSesion");
+btn.addEventListener("click", () => {
+    localStorage.removeItem(loggedUser);
+    console.log("removed item")
+    window.location.replace("../index.html");
+});
 
 
 //agregar boton para eliminar tarea
@@ -45,13 +102,19 @@ const eliminarTarea = () => {
         close[i].onclick = function() {
           let li = this.parentElement;
           
+          for (usuario of BBDD){
+            if (usuario._user === user._user){
+                usuario._tasks.splice(i, 0);
+            }
+          }
           user.removerTarea(li.innerText.slice(0, li.innerText.length-2))
 
           li.remove();
-
-          console.log(user)
+          console.count()
+          guardarSesion();
         }
     }
+    console.log(user)
 }
 eliminarTarea();
 
@@ -75,7 +138,6 @@ const addTask = (listaID, inputID) => {
     if(input.value !== ""){
         document.getElementById(listaID).appendChild(li);
         user.agregarTarea(input.value, inputID);
-        console.log(user)
     }
     
     input.value = "";
@@ -97,6 +159,7 @@ const addTask = (listaID, inputID) => {
     }
 
     eliminarTarea();
+    guardarSesion();
 }
 
 const addBtnHoy = document.getElementById("addHoy");

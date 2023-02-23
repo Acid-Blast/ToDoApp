@@ -80,6 +80,27 @@ header nav a img:hover{
     cursor: pointer;
 }
 
+header nav div span{
+    font-size: 1rem;
+    margin: 1rem;
+}
+header nav div span a:hover{
+    cursor: pointer;
+}
+
+header nav div button{
+    align-self: center;
+    padding: .5rem;
+    border-radius: 1rem;
+    background-color: var(--exit);
+    color: var(--font-color);
+}
+
+header nav div button:hover{
+    cursor: pointer;
+    box-shadow: inset 0 0 10px var(--dark);
+}
+
 
 #form{
     display: flex;

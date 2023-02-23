@@ -76,12 +76,6 @@ const miForm = document.getElementById("form");
         //guarda al usuario logeado
         localStorage.setItem("loggedUser",JSON.stringify(found));
 
-        //simula inicio de sesion
-        // e.preventDefault();
-        // createModal("Iniciando sesion...",`
-        //     Conectando usuario: <i>${user.value}</i><br>
-        // `);
-        // limpiarForm(miForm);
     }
 });
 
@@ -91,7 +85,7 @@ info.addEventListener("click", () => {
     clickAfuera();
     createModal("Info", `
         Alumno: <i>Marcelo Falasca</i> <br><br>
-        Proximamente este Login va a dar entrada a la App del proyecto final.
+        Proyecto final para Coderhouse
     `);
 });
 
