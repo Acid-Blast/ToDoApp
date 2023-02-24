@@ -363,7 +363,7 @@ aside button img{
     padding: .5rem;
     border-radius: .5rem;
     box-shadow: inset 0 0 5px var(--primaryDark);
-    background-color: #fff2;
+    background-color: #fff2 !important;
     color: var(--font-color);
 }
 

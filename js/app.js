@@ -23,7 +23,7 @@ const guardarSesion = () => {
 
     localStorage.setItem("users", JSON.stringify(BBDD));       
 
-    console.log(BBDD);
+    console.log(user);
 }
 
 //carga sesion de usuario
@@ -66,6 +66,7 @@ const cargarSesion = () => {
                 user._tasks = usuario._tasks;
             }
         }
+
     }
 }
 cargarSesion()
@@ -117,12 +118,18 @@ const eliminarTarea = () => {
 eliminarTarea();
 
 //marcar una tarea
-let lista = document.querySelectorAll("UL");
-for (let i = 0; i < lista.length; i++){
-    lista[i].addEventListener("click", (e) => {
-        if ( e.target.tagName === "LI") e.target.classList.toggle("checked");
-    });
+const marcarTarea = () => {
+    let lista = document.querySelectorAll("UL");
+    for (let i = 0; i < lista.length; i++){
+        lista[i].addEventListener("click", (e) => {
+            if ( e.target.tagName === "LI"){
+                e.target.classList.toggle("checked");
+                guardarSesion()
+            };
+        });
+    }
 }
+marcarTarea()
 
 //agregar una tarea
 const addTask = (listaID, inputID) => {
