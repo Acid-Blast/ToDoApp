@@ -339,7 +339,7 @@ aside button img{
 
 .main-container .card{
     width: 60vw;
-    min-height: 200px;
+    min-height: 100px;
     background-color: var(--primary);
     color: var(--font-color);
     border-radius: 1rem;
@@ -391,7 +391,7 @@ aside button img{
     
 }
 
-.card .card-header .addBtn{
+.card .addBtn{
     background: var(--primary);
     color: var(--font-color);
     padding: .4rem;
@@ -403,8 +403,17 @@ aside button img{
     box-shadow: 0 0 7px var(--primaryDark);
 }
 
-.card .card-header .addBtn:hover{
+.card .addBtn:hover{
     box-shadow: inset 0 0 10px var(--dark);
+}
+/* tarjeta de API */
+
+.card:first-child{
+    height: fit-content;
+}
+.card h3{
+    margin-top: 1rem;
+    text-align: center;
 }
 
 .card ul .closeBtn{
@@ -421,6 +430,11 @@ aside button img{
     color: var(--primaryDark);
     border-radius: .5rem;
 }
+
+/* sweetAlert cambios */
+.swal2-container {
+    z-index: 2000;
+  }
 
 /* -------------------------- Media Queries -------------------------- */
 /* Lo basico para que no se ronpa en mobile */

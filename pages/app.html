@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/Sign-check-icon.png/600px-Sign-check-icon.png?20200929115132">
 
-
     <link rel="stylesheet" href="../css/style.css">
 
     <script src="../js/Obj.js" defer></script>
@@ -24,13 +23,17 @@
             </div>
             <div id="perfil">
                 <span id="perfil-usuario"></span>
-                <button id="btn-cerrarSesion">Cerrar Sesion</button>
+                <!-- <button id="btn-cerrarSesion">Cerrar Sesion</button> -->
             </div>
         </nav>
     </header>
 
     <main>
         <div class="main-container">
+            <div class="card">
+                <h2>Consejo del dia</h2>
+                <span id="span-consejo"></span>
+            </div>
             <div class="card" id="card-hoy">
                 <h2>Para hoy</h2>
                 <div class="card-header">
@@ -56,6 +59,7 @@
                 <ul id="ul-compras"></ul>
             </div>
             
+            
         </div>
 
 
@@ -67,6 +71,9 @@
     <footer>
         <h4>Marcelo Falasca | Coderhouse Javascript | </h4>
     </footer>
+
+    <!-- sweetAlert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </body>
 </html>

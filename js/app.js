@@ -71,12 +71,10 @@ const cargarSesion = () => {
 cargarSesion()
 
 //cerrar sesion -> vuelve al login
-const btn = document.getElementById("btn-cerrarSesion");
-btn.addEventListener("click", () => {
-    localStorage.removeItem(loggedUser);
-    console.log("removed item")
-    window.location.replace("../index.html");
-});
+const cerrarSesion = () => {
+        localStorage.removeItem("loggedUser");
+        window.location.replace("../index.html");
+}
 
 
 //agregar boton para eliminar tarea
@@ -138,6 +136,12 @@ const addTask = (listaID, inputID) => {
     if(input.value !== ""){
         document.getElementById(listaID).appendChild(li);
         user.agregarTarea(input.value, inputID);
+    }else{
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'La tarea no puede estar vacia',
+          })
     }
     
     input.value = "";
@@ -161,7 +165,6 @@ const addTask = (listaID, inputID) => {
     eliminarTarea();
     guardarSesion();
 }
-
 const addBtnHoy = document.getElementById("addHoy");
 addBtnHoy.onclick = () => addTask("ul-hoy", "tarea-hoy");
 
@@ -171,3 +174,38 @@ addBtnMañana.onclick = () => addTask("ul-mañana", "tarea-mañana");
 const addBtnCompras = document.getElementById("addCompras");
 addBtnCompras.onclick = () => addTask("ul-compras", "tarea-compras");
 
+//boton de perfil
+const infoUser = document.getElementById("btn-user");
+infoUser.addEventListener("click", () => {
+    Swal.fire({
+        title: 'Perfil',
+        text: `Usuario: ${user._user} - Correo: ${user._mail} - Edad: ${user._age}`,
+        icon: 'info',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        cancelButtonText: 'Ok',
+        confirmButtonText: 'Cerrar Sesion'
+      }).then((result) => {
+        if (result.isConfirmed) {
+           cerrarSesion();
+        }
+      })
+});
+
+//api para consejo random
+const pedirConsejo = async () => {
+    const resp = await
+        fetch("https://api.adviceslip.com/advice");
+
+    const data = await resp.json();
+
+    const span = document.getElementById("span-consejo");
+    const h3 = document.createElement("H3");
+
+    h3.innerText = `"${data.slip.advice}"`;
+
+    span.appendChild(h3);
+}
+
+pedirConsejo()

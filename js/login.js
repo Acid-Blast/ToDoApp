@@ -13,6 +13,7 @@ Login:
         - Edad mayor de 18
 */
 
+
 //cargo en una variable el contenido del Local Storage
 //si es la primera vez, crea un array vacio
 let BBDD = JSON.parse(localStorage.getItem("users")) || [];
@@ -50,12 +51,14 @@ formReg.addEventListener("submit", (e) => {
 
     if(validarUsuario(user.value, mail.value, pass.value, pass2.value, date.value)){
         guardarUsuario(user.value, mail.value, pass.value, date.value, edad);
-        createModal("Usuario creado con exito", `
-            Nuevo usuario <br><br>
-            Nombre: <i>${user.value}</i> <br>
-            Correo: <i>${mail.value}</i> <br>
-        `);
-         dialog.close();
+
+        Swal.fire({
+            icon: 'success',
+            title: 'Ususario creado con exito',
+            text: `Nombre: ${user.value}
+                   Correo: ${mail.value}`,
+          })
+        dialog.close();
         limpiarForm(formReg);
     }
 });
@@ -67,11 +70,16 @@ const miForm = document.getElementById("form");
     const user = document.getElementById("user");
     const pass = document.getElementById("pass");
 
+
     //compara los datos ingresados con el Local Storage, si no existen, previene la accion del form, si existe, inicia sesion
     let found = BBDD.find(e => (e._user === user.value && e._pass === pass.value));
     if(!found){
         e.preventDefault();
-        createModal("Error", "Usuario o contraseña Incorrectos")
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Usuario o contraseña incorectos',
+          });
     }else{
         //guarda al usuario logeado
         localStorage.setItem("loggedUser",JSON.stringify(found));
@@ -83,10 +91,13 @@ const miForm = document.getElementById("form");
 const info = document.getElementById("infoIcon");
 info.addEventListener("click", () => {
     clickAfuera();
-    createModal("Info", `
-        Alumno: <i>Marcelo Falasca</i> <br><br>
-        Proyecto final para Coderhouse
-    `);
+
+    Swal.fire({
+        icon: 'info',
+        title: 'Proyecto Final Javascript',
+        text: 'Alumno: Marcelo Falasca'
+      })
+
 });
 
 // ------------------ Funciones ------------------
@@ -99,44 +110,71 @@ const guardarUsuario = (user, mail, pass, date, edad) => {
 
 //devuelve false si no se valida la creacion y true si es valida
 const validarUsuario = (user, mail, pass, pass2, date) => {
-     let error = "Error en registro";
+    const dialog = document.getElementById("dialogReg");
+
+    let error = "Error en registro";
 
     if(BBDD.find(e => e._user === user) !== undefined){
-        createModal(error, ` El usuario "${user}" ya está registrado`);
+        Swal.fire({
+            icon: 'error',
+            title: error,
+            text: `El ususario "${user} ya está registrado"`,
+        })
+        dialog.close();
+
         return false;
     }
     if(BBDD.find(e => e._mail === mail) != undefined){
-        createModal(error, ` Ya existe una cuenta con el correo: "${mail}"`);
+        Swal.fire({
+            icon: 'error',
+            title: error,
+            text: `Ya existe una cuenta con el correo: "${mail}"`,
+        })
+        dialog.close();
+
         return false;
     }
     if(calcularEdad(date) < 18 || calcularEdad(date) > 100){
-        createModal(error, `La edad debe estár entre 18 y 99 años`);
+        Swal.fire({
+            icon: 'error',
+            title: error,
+            text: `La edad debe estár entre 18 y 99 años`,
+        })
+        dialog.close();
+
         return false;
     }
     if(pass != pass2){
-        createModal(error, " Las contraseñas no coinciden");
+        Swal.fire({
+            icon: 'error',
+            title: error,
+            text: `Las contraseñas no coinciden`,
+          })
+        dialog.close();
+
         return false;
     }
     return true;
 }
 
-//crea un modal y lo muestra
-const createModal = (titulo, mensaje) => {
-    const modal = document.getElementById("dialog-alert");
-    modal.innerHTML = `
-    <h2> ${titulo} </h2>
-    <div> ${mensaje} </div>
-    <button id="btn-salir" class="exit" type="button"> X </button>
-    `;
-    modal.showModal();
+// --- Dejo comentada esta funcion que habia hecho para modales, porque me pareció interesante el uso de la tag Dialog para modales rapidos, ademas de que se me ocurrió solo --
+//crea un modal y lo muestra -> reemplazado por SweetAlert
+// const createModal = (titulo, mensaje) => {
+//     const modal = document.getElementById("dialog-alert");
+//     modal.innerHTML = `
+//     <h2> ${titulo} </h2>
+//     <div> ${mensaje} </div>
+//     <button id="btn-salir" class="exit" type="button"> X </button>
+//     `;
+//     modal.showModal();
 
-    clickAfuera();
-    const salir = document.getElementById("btn-salir");
-    salir.addEventListener("click", () => {
-        modal.removeAttribute(open);
-        modal.close();
-    });
- }
+//     clickAfuera();
+//     const salir = document.getElementById("btn-salir");
+//     salir.addEventListener("click", () => {
+//         modal.removeAttribute(open);
+//         modal.close();
+//     });
+//  }
 
 //limpia los valores del form
 const limpiarForm = (form) => {
